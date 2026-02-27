@@ -7,8 +7,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: 155795
+    username: DB
+    password: DB
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -54,6 +54,6 @@ logging:
     org.springframework.mail: DEBUG
 
 jwt:
-  secret: 240293583953053053938539530253256
+  secret: SECRET
   expiration: 86400000
 
