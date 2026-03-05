@@ -1,10 +1,9 @@
 package org.example.email_entity.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
 
-@Data
-@AllArgsConstructor
-public class AuthResponse {
-    private String token;
+@Builder
+public record AuthResponse(
+        String token,
+        String bearer) {
 }

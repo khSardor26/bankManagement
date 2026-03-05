@@ -1,4 +1,4 @@
-package org.example.email_entity.service;
+package org.example.email_entity.security;
 
 import lombok.RequiredArgsConstructor;
 import org.example.email_entity.entity.User;
@@ -25,4 +25,3 @@ public class MyUserDetailsService implements UserDetailsService {
                 .build();
     }
 }
-

@@ -1,21 +1,24 @@
 package org.example.email_entity.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jdk.jfr.Timestamp;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-
 @Table(name = "users")
 public class User {
 
@@ -23,20 +26,55 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Column(unique = true, length = 255)
     private String email;
+
+    @Column(length = 100)
     private String fullName;
+
+    @Column(length = 100)
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Roles role;
 
 
-    @Timestamp
-    private LocalDateTime created;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id", unique = true)
-    private Account account;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Card> cards = new ArrayList<>();
+
+
+    @PrePersist
+    public void onCreate(){
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
+    }
+
+    @PreUpdate
+    public void onUpdate(){
+        LocalDateTime now = LocalDateTime.now();
+        this.updatedAt = now;
+    }
+
+    public void addCard(Card card) {
+        cards.add(card);
+        card.setUser(this);
+    }
+
+    public void removeCard(Card card) {
+        cards.remove(card);
+        card.setUser(null);
+    }
+
 
 
 }
