@@ -100,6 +100,22 @@ docker compose down
 docker compose down -v
 ```
 
+## 4.5 Запуск приложения в Docker
+
+Сборка образа:
+
+```bash
+docker build -t bank-management .
+```
+
+Запуск контейнера (использует ваш `.env` файл):
+
+```bash
+docker run --env-file .env -p 8080:8080 bank-management
+```
+
+Если база данных запущена в Docker, убедитесь что `DB_HOST` в `.env` указывает на имя контейнера БД из `docker-compose.yml`.
+
 ## 5. Запуск приложения
 
 ### 5.1 Сборка

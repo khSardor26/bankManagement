@@ -100,6 +100,22 @@ docker compose down
 docker compose down -v
 ```
 
+## 4.5 Run the App in Docker
+
+Build the image:
+
+```bash
+docker build -t bank-management .
+```
+
+Run the container (uses your `.env` file):
+
+```bash
+docker run --env-file .env -p 8080:8080 bank-management
+```
+
+If the database is running in Docker, make sure `DB_HOST` in `.env` points to the DB container name from `docker-compose.yml`.
+
 ## 5. Run the Application
 
 ### 5.1 Build
@@ -408,4 +424,3 @@ docker compose up -d
 # Build jar
 ./mvnw clean package
 ```
-

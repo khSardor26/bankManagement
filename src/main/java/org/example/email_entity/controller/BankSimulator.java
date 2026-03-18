@@ -3,8 +3,7 @@ package org.example.email_entity.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.email_entity.dto.*;
-import org.example.email_entity.service.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.email_entity.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/")
 @RequiredArgsConstructor
 public class BankSimulator {
-
-    @Autowired
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @PostMapping("users/user/addCard")
     public ResponseEntity<BankResponse> addCard(@RequestBody AddCardRequest request){

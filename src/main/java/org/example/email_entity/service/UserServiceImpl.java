@@ -2,14 +2,13 @@ package org.example.email_entity.service;
 
 
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.email_entity.dto.*;
 import org.example.email_entity.entity.Card;
 import org.example.email_entity.entity.CardStatus;
 import org.example.email_entity.entity.User;
 import org.example.email_entity.repository.CardRepository;
 import org.example.email_entity.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -19,19 +18,15 @@ import java.util.List;
 
 
 @Service
-@AllArgsConstructor
-public class UserServiceImpl {
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
 
-    @Autowired
     private final UserRepository userRepository;
-
-    @Autowired
     private final EmailServiceImpl emailService;
-
-    @Autowired
     private final CardRepository cardRepository;
 
     @Transactional
+    @Override
     public BankResponse addCard(AddCardRequest request) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -63,6 +58,7 @@ public class UserServiceImpl {
 
 
     @Transactional
+    @Override
     public void removeCard(Long cardNum) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -84,6 +80,7 @@ public class UserServiceImpl {
 
 
     @Transactional
+    @Override
     public BankResponse deposit(Long amount, Long cardNum){
         if (amount < 0) throw new RuntimeException("Negative amount");
 
@@ -123,6 +120,7 @@ public class UserServiceImpl {
     }
 
     @Transactional
+    @Override
     public BankResponse withdraw(Long amount, Long cardNum){
         if (amount < 0) throw new RuntimeException("Negative amount");
 
@@ -168,6 +166,7 @@ public class UserServiceImpl {
     }
 
     @Transactional
+    @Override
     public BankResponse transfer(TransferRequest request) {
         if (request.amount() < 0) throw new RuntimeException("Negative amount");
 
@@ -230,6 +229,7 @@ public class UserServiceImpl {
 
 
     @Transactional
+    @Override
     public UserWithCardsResponse getMeWithCards() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();

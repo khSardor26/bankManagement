@@ -6,7 +6,6 @@ import org.example.email_entity.dto.AuthResponse;
 import org.example.email_entity.dto.LoginRequest;
 import org.example.email_entity.dto.RegisterRequest;
 import org.example.email_entity.service.AuthService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    @Autowired
     private final AuthService authService;
 
     @PostMapping("/register")

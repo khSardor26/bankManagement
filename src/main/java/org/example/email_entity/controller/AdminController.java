@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.email_entity.dto.AdminUpdateCard;
 import org.example.email_entity.entity.Card;
 import org.example.email_entity.entity.User;
-import org.example.email_entity.service.AdminServiceImpl;
+import org.example.email_entity.service.AdminService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/admin")
 public class AdminController {
 
-    private final AdminServiceImpl adminService;
+    private final AdminService adminService;
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users")

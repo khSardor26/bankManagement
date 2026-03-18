@@ -15,11 +15,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AdminServiceImpl {
+public class AdminServiceImpl implements AdminService {
 
     private final UserRepository userRepository;
     private final CardRepository cardRepository;
 
+    @Override
     public Card updateCard(AdminUpdateCard request){
         Card card = cardRepository.findBycardNumber(request.cardNum()).orElseThrow(
                 () -> new RuntimeException("Card not found"));
@@ -30,6 +31,7 @@ public class AdminServiceImpl {
         return card;
     }
 
+    @Override
     public Page<User> getAllUsersWithCard(Pageable pageable) {
         return userRepository.findAllUsersWithCards(pageable);
     }
