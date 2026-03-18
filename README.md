@@ -409,6 +409,3 @@ docker compose up -d
 ./mvnw clean package
 ```
 
-Note(## 15. License
-
-This project is available under the MIT License.)
