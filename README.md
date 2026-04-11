@@ -1,4 +1,4 @@
-# Bank management API
+# Bank management Api
 
 ![Java](https://img.shields.io/badge/Java-21-red?logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-6DB33F?logo=springboot&logoColor=white)
